@@ -26,5 +26,11 @@ class MediaLibraryController extends Controller
         $media_obj = $user_obj->media->all();
         return view('alternate', ['user_obj' => $user_obj, 'media_obj' => $media_obj ]);
     }
+    public function try(Request $request)
+    {
+        $user_obj = auth()->user();
+
+        return view('try1');
+    }
 
 }

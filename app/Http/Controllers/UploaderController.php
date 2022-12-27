@@ -80,7 +80,9 @@ class UploaderController extends Controller
         $mime_original = $file->getMimeType();
         $mime = str_replace('/', '-', $mime_original);
 
-        $folderDATE = $request->dataDATE;
+        //$folderDATE = $request->dataDATE;
+        $folderDATE = now()->format('Y-m-d');
+        logger($folderDATE);
 
         $folder  = $folderDATE;
         $filePath = "public/upload/medialibrary/{$user_obj->id}/{$folder}/";
@@ -119,8 +121,10 @@ class UploaderController extends Controller
         //delete timestamp from file name
         $temp_arr = explode('_', $filename);
         if ( isset($temp_arr[0]) ) unset($temp_arr[0]);
-        $filename = implode('_', $temp_arr);
-
+       $filename = implode('_', $temp_arr);
+        logger($filename);
+        $filename = strlen($filename) > 3 ? $filename : (int)now()->getPreciseTimestamp(3);
+        logger($filename);
         //here you can manipulate with file name e.g. HASHED
         return $filename.".".$extension;
     }
@@ -135,13 +139,14 @@ class UploaderController extends Controller
         $user_obj = auth()->user();
 
         $file = $request->filename;
+        logger($file);
 
         //delete timestamp from filename
         $temp_arr = explode('_', $file);
         if ( isset($temp_arr[0]) ) unset($temp_arr[0]);
         $file = implode('_', $temp_arr);
 
-        $dir = $request->date;
+        $dir = now()->format('Y-m-d');
 
         $filePath = "public/upload/medialibrary/{$user_obj->id}/{$dir}/";
         $finalPath = storage_path("app/".$filePath);

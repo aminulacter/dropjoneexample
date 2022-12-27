@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 //Media library routes
 Route::get('/medialibrary', [App\Http\Controllers\MediaLibraryController::class, 'mediaLibrary'])->name('media-library');
 Route::get('/alternate', [App\Http\Controllers\MediaLibraryController::class, 'alternate'])->name('alternate-library');
+Route::get('/try', [App\Http\Controllers\MediaLibraryController::class, 'try'])->name('alternate-library');
 
 //FILE UPLOADS CONTROLER
 Route::post('medialibrary/upload', [App\Http\Controllers\UploaderController::class, 'upload'])->name('file-upload');

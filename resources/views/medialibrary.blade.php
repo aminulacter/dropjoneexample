@@ -35,6 +35,8 @@
                     init: function() {
                         this.on("addedfile", file => {
                             console.log("A file has been added");
+
+
                         });
                     },
                     parallelUploads: 1,  // since we're using a global 'currentFile', we could have issues if parallelUploads > 1, so we'll make it = 1
